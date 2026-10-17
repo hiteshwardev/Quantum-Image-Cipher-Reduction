@@ -1,0 +1,10 @@
+side,pixels,generic_theory,generic_bound,xor_theory,xor_bound,bit_theory,bit_bound,xor_measured,xor_exact,bit_measured,bit_exact,generic_measured,generic_exact
+4,16,256,211,2,2,8,7,2,True,8,True,256.0,True
+8,64,256,212,2,2,10,9,2,True,10,True,256.0,True
+16,256,256,212,2,2,12,11,2,True,12,True,256.0,True
+32,1024,257,212,3,3,14,13,3,True,14,True,257.0,True
+64,4096,257,212,3,3,16,15,3,True,16,True,257.0,True
+128,16384,257,213,3,3,18,17,3,True,18,True,257.0,True
+256,65536,257,213,3,3,20,19,3,True,20,True,257.0,True
+512,262144,258,213,4,4,22,21,4,True,22,True,,
+1024,1048576,258,213,4,4,24,23,4,True,24,True,,
