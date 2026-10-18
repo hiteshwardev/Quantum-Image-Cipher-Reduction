@@ -1,83 +1,56 @@
-# Quantum image ciphers on NEQR reduce to classical permutation-diffusion ciphers
+# A Structure Theorem for NEQR Quantum Image Ciphers: Reduction to Classical Permutation-Diffusion Ciphers, a Near-Optimal Chosen-Plaintext Attack and the Limits of Statistical Security Metrics
 
-Code and data for the article *A structure theorem for NEQR quantum image ciphers: reduction to
-classical permutation-diffusion ciphers, a near-optimal chosen-plaintext attack and the limits of
-statistical security metrics* by Hitesh Kumar Singh.
+**Author:** Hitesh Kumar Singh · [ORCID: 0009-0008-1583-4848](https://orcid.org/0009-0008-1583-4848)
+*Department of Physics, Kurukshetra University, Kurukshetra, Haryana, India*
 
-The study proves that a unitary which maps every NEQR image to an NEQR image, with a cipher image
-that determines the plain image, acts on the pixel array as a position permutation followed by
-position-dependent value bijections. It then gives one chosen-plaintext attack that recovers an
-equivalent key of every plaintext-independent cipher of this form, compares the query count with
-information-theoretic lower bounds, and shows that the standard statistical battery (entropy,
-correlation, NPCR, UACI, PSNR and NIST SP 800-22) cannot tell a broken cipher from a resistant one.
+---
 
-## Repository layout
+## Abstract
 
-```
-notebook.ipynb     the complete study: theory, validation, experiments E1 to E4, figures, final results
-src/qic/           reusable modules imported by the notebook
-tests/test_qic.py  unit tests of the modules
-figures/           the 16 figures of the article, PNG at 600 dpi and PDF
-results/           result files written by the notebook, with SHA256SUMS
-requirements.txt   pinned Python dependencies
-environment.yml    conda environment built from requirements.txt
-```
+Quantum image ciphers on NEQR are credited with security from their quantum encoding. This work proves that any unitary that maps every NEQR image to an NEQR image, with an invertible cipher image, acts on the pixel array as a position permutation followed by position-dependent value bijections. Such ciphers are classical. One chosen-plaintext attack recovers an equivalent key of every plaintext-independent member with 257 queries for 256 × 256 eight-bit images, against an information-theoretic lower bound of 213. On 120 images, a broken cipher is statistically equivalent to an attack-resistant one on entropy, correlation, key-sensitivity NPCR and UACI, and PSNR, and both pass the NIST SP 800-22 tests that were run.
 
-## Running the study
+## Core Objectives
 
-Python 3.13 and the packages in `requirements.txt` are required.
+- Characterize exactly which unitary operations can implement an image cipher on NEQR with a deterministic classical cipher image.
+- Determine what this implies for security, and whether any security property can come from the quantum representation.
+- Test whether the statistical metrics used in the literature can distinguish a completely broken cipher from an attack-resistant one.
 
-```
-python -m pip install -r requirements.txt
-jupyter nbconvert --to notebook --execute --inplace --ExecutePreprocessor.timeout=-1 notebook.ipynb
-```
+## Scientific Significance
 
-or, with conda, `conda env create -f environment.yml` followed by the same `jupyter` command. The
-notebook can also be opened in Jupyter and run from top to bottom. A full run takes about nine
-minutes on one CPU core and needs about 3.5 GB of memory, mostly for the full-size state vectors
-of dimension 2^24 and the gate tables of the full-size ciphers.
+Reviews of quantum image encryption attribute security to superposition, entanglement and no-cloning, and the evidence offered is almost always a fixed set of statistics on cipher images. This project shows that for the studied class the representation adds nothing, so the security question reduces to classical cryptanalysis. It also shows that such statistics are necessary sanity checks but not evidence of security. The results do not claim that no quantum image cipher can be secure; they identify the hypotheses under which a security argument must be made.
 
-The notebook writes every figure to `figures/` and every result file to `results/`:
+## Methodological Approach
 
-| File | Content |
-|---|---|
-| `results.json` | every number reported in the article |
-| `ensemble_statistics.csv` | spectral exponent, adjacent-pixel correlations and entropy of each plain image |
-| `attack_coverage.csv` | the three attacks against the six constructions, five keys each |
-| `query_scaling.csv` | measured and theoretical query counts and lower bounds for 16 to 1048576 pixels |
-| `per_image_metrics.csv` | the metric battery for every image and both ciphers |
-| `nist_pvalues.csv` | p-values of the six NIST SP 800-22 tests for every cipher image |
-| `run_info.json` | software versions and wall-clock times (machine dependent) |
-| `SHA256SUMS` | checksums of the deterministic result files |
+- **Structure theorem:** the cipher is identified with an automorphism of the Hamming graph of images, whose automorphism group is the wreath product S<sub>L</sub> ≀ S<sub>N</sub>.
+- **Attack and bounds:** a generic equivalent-key recovery algorithm with constant images and base-L tag images, with matching information-theoretic lower bounds and specializations (XOR, bit level).
+- **Three independent code paths** (classical pixel array, dense state-vector simulation, composed gate tables) used to cross-check results exactly, including dense non-basis-preserving unitaries.
+- **Statistical battery:** entropy, adjacent-pixel correlation, NPCR/UACI, PSNR and NIST SP 800-22 tests on 120 images, with paired two one-sided tests (TOST) against margins fixed in advance.
 
-## Reproducibility
+## Contributions
 
-Every random quantity derives from the global seed 20260712 through `qic.seeding.rng(tag)`, which
-hashes a text tag with SHA-256 and combines it with the seed. Re-running the notebook in the same
-environment reproduces every file listed in `results/SHA256SUMS` byte for byte; check with
+1. A **structure theorem** showing that NEQR-preserving, invertible unitaries have the permutation-diffusion form, including dense unitaries that do not preserve the computational basis.
+2. **Representation independence:** the quantum and classical ciphers compute the same function, so no security property can come from the representation.
+3. A unified chosen-plaintext attack for arbitrary position-dependent substitutions with (L − 1) + ⌈log<sub>L</sub> N⌉ queries, within a factor 1.21 of a matching lower bound (257 vs 213), and an XOR specialization that meets its bound (3 queries). The constituent techniques are classical; the contribution is the unification and the lower bounds.
+4. A proof that value-controlled position gates leave most images without a cipher image, and that independent bit-plane permutations cannot be realized on NEQR.
+5. A tested demonstration that the metric battery does not separate a broken cipher from an attack-resistant one.
 
-```
-cd results && sha256sum -c SHA256SUMS
-```
+6. **Positioning relative to prior work.** Equivalent-key recovery, tag-image attacks on permutation-only ciphers and zero-image attacks on diffusion layers are established in classical image cryptanalysis (e.g. Li et al.; Zhang et al., "On the security of a class of diffusion mechanisms for image encryption"). The novelty claimed here is the structure theorem for NEQR-preserving unitaries, representation independence, and the matching query lower bounds. A literature search in October 2026 found no earlier theorem of this form. This is a search result, not a proof of priority.
 
-`run_info.json` is excluded because it records timings.
+## Key Findings
 
-## Modules
+- Pixel-array and state-vector computations agree on all 541,696 enumerated cases and on 120 full-size images (state dimension 2²⁴).
+- The attack recovers the exact equivalent key of every plaintext-independent construction implemented (257 queries; 3 for XOR; 20 at bit level).
+- Value-controlled position gates leave 75.0%, 75.0% and 93.8% of images without a cipher image at the three tested sizes.
+- Broken and attack-resistant ciphers are equivalent on seven battery metrics; plaintext-sensitivity NPCR (0.0015% vs 99.6%) and the attack itself are the only measures that separate them.
 
-| Module | Purpose |
-|---|---|
-| `seeding` | reproducible random streams from the global seed |
-| `neqr` | NEQR states, overlaps, readout, bit-plane conversion and a dense state-vector simulator |
-| `normal_form` | gate tables on value-position pairs, factorisation into the normal form, dense realisations |
-| `keystream` | logistic keystreams, keyed Arnold permutations and key derivation |
-| `schemes` | the six cipher constructions, each runnable on pixel arrays and on state vectors |
-| `attack` | the generic, XOR and bit-level equivalent-key attacks, query costs and lower bounds |
-| `metrics` | the metric battery, the NIST SP 800-22 tests with their worked examples, TOST and bootstrap |
-| `images` | the synthetic image ensemble and its spectral characterisation |
-| `plotting` | figure style, layout checks and export |
+## Scope and Limitations
 
-Run the unit tests with `python -m pytest tests`.
+The constructions follow published operation templates and are not exact reimplementations of any single scheme. The theorem covers NEQR (and the bit-plane representation) with classical readout; protocols that transmit quantum states are outside it. FRQI is not covered. The image ensemble is synthetic.
 
-## License
+## Roles
 
-MIT, see `LICENSE`.
+Hitesh Kumar Singh is the sole author. Hitesh Kumar Singh conceived the study, developed the theory and proofs, wrote the software, performed the analysis and wrote the manuscript. This included designing the exhaustive verification and the statistical equivalence testing.
+
+## Reproducibility and Availability
+
+The repository contains the notebook, code and generated data with SHA-256 checksums that reproduce every result, table and figure. The code is released under the MIT licence.
