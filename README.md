@@ -34,7 +34,7 @@ Reviews of quantum image encryption attribute security to superposition, entangl
 4. A proof that value-controlled position gates leave most images without a cipher image, and that independent bit-plane permutations cannot be realized on NEQR.
 5. A tested demonstration that the metric battery does not separate a broken cipher from an attack-resistant one.
 
-6. **Positioning relative to prior work.** Equivalent-key recovery, tag-image attacks on permutation-only ciphers and zero-image attacks on diffusion layers are established in classical image cryptanalysis (e.g. Li et al.; Zhang et al., "On the security of a class of diffusion mechanisms for image encryption"). The novelty claimed here is the structure theorem for NEQR-preserving unitaries, representation independence, and the matching query lower bounds. A literature search in October 2026 found no earlier theorem of this form. This is a search result, not a proof of priority.
+6. **Positioning relative to prior work.** Equivalent-key recovery, tag-image attacks on permutation-only ciphers and zero-image attacks on diffusion layers are established in classical image cryptanalysis (e.g. Li et al.; Zhang et al., "On the security of a class of diffusion mechanisms for image encryption"). The novelty claimed here is the structure theorem for NEQR-preserving unitaries, representation independence, and the matching query lower bounds. 
 
 ## Key Findings
 
