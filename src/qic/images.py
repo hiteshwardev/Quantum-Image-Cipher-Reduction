@@ -120,3 +120,27 @@ def demo_image(side: int = 128) -> np.ndarray:
     stripes = (x > 0.55) & (x < 0.9) & (y > 0.62) & (y < 0.9)
     img = np.where(stripes, 0.5 + 0.4 * np.sin(2 * np.pi * 12 * x), img)
     return to_8bit(img)
+
+
+# standard test images --------------------------------------------------------
+
+#: Grey-level test images bundled with scikit-image whose documentation states
+#: a CC0 licence or no copyright restriction; all are 512 x 512, 8-bit.
+STANDARD_IMAGES = ("camera", "brick", "grass", "gravel")
+
+
+def standard_images() -> dict[str, np.ndarray]:
+    """The CC0 test images of :data:`STANDARD_IMAGES` as 8-bit integer arrays.
+
+    scikit-image ships these files with the package, so no download is needed.
+    The import is local so that the rest of the package does not depend on it.
+    """
+    from skimage import data
+
+    out = {}
+    for name in STANDARD_IMAGES:
+        img = np.asarray(getattr(data, name)(), dtype=np.int64)
+        if img.shape != (512, 512) or img.min() < 0 or img.max() > 255:
+            raise ValueError(f"unexpected test image {name!r}: {img.shape}")
+        out[name] = img
+    return out

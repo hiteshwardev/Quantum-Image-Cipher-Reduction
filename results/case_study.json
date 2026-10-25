@@ -1,0 +1,53 @@
+{
+ "abs_corr_max": 0.005637604400849542,
+ "all_images_recovered": true,
+ "all_keys_exact": true,
+ "entropy_range": [
+  7.99920867677552,
+  7.999344085438575
+ ],
+ "expected_entropy_uniform": 7.9992983107844795,
+ "figure_recovered": 1.0,
+ "generic_lower_bound": 213,
+ "generic_queries": 258,
+ "images": [
+  "camera",
+  "brick",
+  "grass",
+  "gravel"
+ ],
+ "key_change_x0": 1e-10,
+ "key_npcr_range": [
+  99.61357116699219,
+  99.61357116699219
+ ],
+ "key_uaci_range": [
+  33.36418899835325,
+  33.47223917643229
+ ],
+ "pixels": 262144,
+ "pt_npcr_max": 0.0003814697265625,
+ "state_path": [
+  {
+   "images": 20,
+   "mismatches": 0,
+   "reading": "xor",
+   "state_dimension": 262144
+  },
+  {
+   "images": 20,
+   "mismatches": 0,
+   "reading": "add",
+   "state_dimension": 262144
+  }
+ ],
+ "sweep_keys_exact": 72,
+ "sweep_min_recovered": 1.0,
+ "sweep_queries": [
+  257
+ ],
+ "sweep_settings": 72,
+ "ulp_change_pixels_differing": 1,
+ "xor_lower_bound": 4,
+ "xor_queries": 4
+}
